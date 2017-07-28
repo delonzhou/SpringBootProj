@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.marving.boot.dao.master.UserInfoDao">
+    <resultMap id="BaseResultMap" type="com.marving.boot.domain.master.UserInfo">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="status" property="status" />
+        <result column="db" property="db"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id,name,status,db
+    </sql>
+
+    <select id="getAllUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user
+    </select>
+
+
+    <select id="findById" parameterType="String" resultMap="com.marving.boot.domain.master.UserInfo">
+        select <include refid="Base_Column_List" />
+        from USER where id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.marving.boot.domain.master.UserInfo">
+        update user
+        <set>
+            <if test="id!=null">
+                id=#{id},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="db!=null">
+                db=#{db},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

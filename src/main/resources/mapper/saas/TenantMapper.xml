@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.marving.boot.dao.saas.TenantDao">
+    <resultMap id="BaseResultMap" type="com.marving.boot.domain.Tenant">
+        <result column="id" property="id" />
+        <result column="tname" property="tname" />
+        <result column="addr" property="addr" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id,tname,addr
+    </sql>
+
+    <select id="getAllTenantOfThisDb" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tenant
+    </select>
+
+</mapper>
